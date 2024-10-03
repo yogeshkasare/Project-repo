@@ -1,24 +1,23 @@
-apiVersion: apps/v1 
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: regapp-deployment
-  labels: 
-     app: regapp
-
+  name: my-app1
+  namespace: default
+  labels:
+    app: my-app1
 spec:
-  replicas: 2 
+  replicas: 1
   selector:
     matchLabels:
-      app: regapp
-
+      app: my-app1
   template:
     metadata:
       labels:
-        app: regapp
+        app: my-app1
     spec:
       containers:
-      - name: regapp
-        image: ubuntu:latest
+      - name: my-app1
+        image: 288761750357.dkr.ecr.ap-southeast-1.amazonaws.com/mansi-30:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 8080

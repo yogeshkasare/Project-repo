@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: regapp-service
+  name: regapp-service1
   labels:
-    app: regapp 
+    app: my-app1
 spec:
   selector:
-    app: regapp 
+    app: my-app1
 
   ports:
     - port: 8080

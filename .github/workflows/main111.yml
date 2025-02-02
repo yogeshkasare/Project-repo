@@ -67,8 +67,9 @@ jobs:
 
       - name: Update deployment.yml with new image
         run: |
-          IMAGE_URL=${{ steps.login-ecr.outputs.registry }}/yogeshecrrepo:${{ github.sha }}
-          sed -i "s|image: .*|image: $IMAGE_URL|g" regapp-deploy.yml
+          ECR_REGISTRY=${{ steps.login-ecr.outputs.registry }}
+          IMAGE_URL=$ECR_REGISTRY/yogeshecrrepo:${{ github.sha }}
+          sed -i "s|<IMAGE_URL>|$IMAGE_URL|g" regapp-deploy.yml
 
       - name: Apply Kubernetes manifests
         run: |

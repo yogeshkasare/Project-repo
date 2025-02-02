@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: my-app1
-        image: 741448935198.dkr.ecr.ap-south-1.amazonaws.com/yogeshecrrepo:latest
+        image: <IMAGE_URL>
         imagePullPolicy: Always
         ports:
         - containerPort: 8080

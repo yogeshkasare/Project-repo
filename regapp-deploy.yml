@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: my-app1
-        image: 207567789528.dkr.ecr.ap-south-1.amazonaws.com/newwwww
+        image: 741448935198.dkr.ecr.ap-south-1.amazonaws.com/yogeshecrrepo:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 8080

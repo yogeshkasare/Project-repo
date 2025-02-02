@@ -22,11 +22,6 @@ jobs:
       - name: Build with Maven
         run: mvn package
 
-      - name: Upload .war file
-        uses: actions/upload-artifact@v4
-        with:
-          name: my-webapp-war
-          path: target/*.war
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1

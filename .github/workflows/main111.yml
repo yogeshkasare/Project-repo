@@ -44,7 +44,11 @@ jobs:
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
-  
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
@@ -62,7 +66,7 @@ jobs:
       - name: Update deployment.yml with new image
         run: |
           ECR_REGISTRY=${{ steps.login-ecr.outputs.registry }}
-          IMAGE_URL=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          IMAGE_URL=$ECR_REGISTRY/yogeshecrrepo:${{ github.sha }}
           sed -i "s|<IMAGE_URL>|$IMAGE_URL|g" regapp-deploy.yml
 
       - name: Apply Kubernetes manifests

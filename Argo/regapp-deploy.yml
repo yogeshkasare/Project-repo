@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: my-app1
-        image: http://13.235.100.26:8081/repository/my-docker/8085/your-app-image:latest
+        image: 
         imagePullPolicy: Always
         ports:
         - containerPort: 8080

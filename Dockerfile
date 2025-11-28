@@ -3,7 +3,7 @@
 # Build ID: v2 - Added metadata label for CI/CD testing
 # ---------------------------------------------------------
 
-FROM tomcat:9.0
+FROM tomcat:10.1
 
 # Non-functional metadata for tracking build origin
 LABEL ci.build.note="Pipeline test - safe change; no app not ok ok  impact"

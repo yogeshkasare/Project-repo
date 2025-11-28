@@ -1,3 +1,12 @@
+
+# ---------------------------------------------------------
+# Build ID: v2 - Added metadata label for CI/CD testing
+# ---------------------------------------------------------
+
 FROM tomcat:latest
-RUN cp -R  /usr/local/tomcat/webapps.dist/*  /usr/local/tomcat/webapps
-COPY webapp/target/*.war /usr/local/tomcat/webapps 
+
+# Non-functional metadata for tracking build origin
+LABEL ci.build.note="Pipeline test - safe change; no app impact"
+
+RUN cp -R /usr/local/tomcat/webapps.dist/* /usr/local/tomcat/webapps
+COPY webapp/target/*.war /usr/local/tomcat/webapps

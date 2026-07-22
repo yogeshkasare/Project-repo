@@ -19,7 +19,7 @@ on:
         type: string
 
       run_tests:
-        description: "Run tests?"
+        description: "Run Tests"
         required: true
         default: true
         type: boolean
@@ -32,22 +32,41 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Print Inputs
+      - name: Display Workflow Inputs
         run: |
-          echo "Environment: ${{ github.event.inputs.environment }}"
-          echo "Version: ${{ github.event.inputs.version }}"
-          echo "Run Tests: ${{ github.event.inputs.run_tests }}"
+          echo "Environment : ${{ github.event.inputs.environment }}"
+          echo "Version     : ${{ github.event.inputs.version }}"
+          echo "Run Tests   : ${{ github.event.inputs.run_tests }}"
+
+      - name: Print Complete Event Payload
+        run: |
+          echo "========== GITHUB_EVENT_PATH =========="
+          echo "Location: $GITHUB_EVENT_PATH"
+          cat "$GITHUB_EVENT_PATH"
+
+      - name: Pretty Print Event Payload
+        run: |
+          echo "========== FORMATTED EVENT PAYLOAD =========="
+          jq . "$GITHUB_EVENT_PATH"
+
+      - name: Print GitHub Context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: |
+          echo "========== GITHUB CONTEXT =========="
+          echo "$GITHUB_CONTEXT"
 
       - name: Simulate Deployment
         run: |
-          echo "Deploying version ${{ github.event.inputs.version }} to ${{ github.event.inputs.environment }}"
+          echo "Deploying version '${{ github.event.inputs.version }}' to '${{ github.event.inputs.environment }}'"
 
       - name: Run Tests
         if: ${{ github.event.inputs.run_tests == 'true' }}
         run: |
           echo "Running tests..."
           sleep 5
-          echo "Tests Passed!"
+          echo "Tests completed successfully."
 
-      - name: Complete
-        run: echo "Workflow completed successfully."
+      - name: Workflow Complete
+        run: |
+          echo "Workflow execution completed."

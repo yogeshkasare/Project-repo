@@ -1,0 +1,53 @@
+name: Opsera Demo Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Deployment environment"
+        required: true
+        type: choice
+        options:
+          - dev
+          - qa
+          - prod
+
+      version:
+        description: "Application version"
+        required: true
+        default: "1.0.0"
+        type: string
+
+      run_tests:
+        description: "Run tests?"
+        required: true
+        default: true
+        type: boolean
+
+jobs:
+  demo:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Print Inputs
+        run: |
+          echo "Environment: ${{ github.event.inputs.environment }}"
+          echo "Version: ${{ github.event.inputs.version }}"
+          echo "Run Tests: ${{ github.event.inputs.run_tests }}"
+
+      - name: Simulate Deployment
+        run: |
+          echo "Deploying version ${{ github.event.inputs.version }} to ${{ github.event.inputs.environment }}"
+
+      - name: Run Tests
+        if: ${{ github.event.inputs.run_tests == 'true' }}
+        run: |
+          echo "Running tests..."
+          sleep 5
+          echo "Tests Passed!"
+
+      - name: Complete
+        run: echo "Workflow completed successfully."
